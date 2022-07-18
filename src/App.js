@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import Counter from "./module/Counter";
+import Theme from "./module/darkModeButton";
+import ToDo from './module/toDo'
+import { useDispatch } from 'react-redux/es/hooks/useDispatch';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { toDark, toWhite } from './module/modeChange'
 
 function App() {
+  const style = useSelector(state => state.modeChanger);
+  const theme = useSelector(state => (state.modeReducer.time));
+  const dispatch = useDispatch()
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={theme == 'light' ?
+      {
+        backgroundColor: 'white',
+        color: 'black'
+      }
+      :
+      {
+        backgroundColor: 'black',
+        color: 'white'
+      }}>
+      <Counter />
+      <Theme />
+      <ToDo />
     </div>
+
   );
 }
 
